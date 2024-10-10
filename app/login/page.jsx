@@ -5,15 +5,19 @@ import { useEffect } from 'react';
 import createSession from '../actions/createSession';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/authContext';
 
 const LoginPage = () => {
     const [state, formAction] = useFormState(createSession, {});
+
+    const {isAuthenticated, setIsAuthenticated} = useAuth();
+
     const router = useRouter();
 
     useEffect(() => {
         if (state.error) toast.error(state.error);
         if (state.success) {
-            toast.success('Login successful!');
+            setIsAuthenticated(true);
             router.push('/');
         }
     }, [state]);
