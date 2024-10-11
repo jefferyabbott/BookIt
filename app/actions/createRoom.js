@@ -19,7 +19,7 @@ async function createRoom(previousState, formData) {
     // create room
     const newRoom = await databases.createDocument(
       process.env.NEXT_PUBLIC_APPWRITE_DATABASE,
-      provess.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ROOMS,
+      process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ROOMS,
       ID.unique(),
       {
         user_id: user.id,
@@ -41,7 +41,7 @@ async function createRoom(previousState, formData) {
     }
   } catch (error) {
     console.log(error);
-    const errorMessage = error.response.message || "An unexpected error has occured.";
+    const errorMessage = "An unexpected error has occured.";
     return {
       error: errorMessage
     }
