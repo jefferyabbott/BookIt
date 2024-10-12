@@ -10,7 +10,11 @@ const CancelBookingButton = ({ bookingId }) => {
         if (confirmed) {
             try {
                 const response = await cancelBooking(bookingId);
-                toast.success('Booking cancelled.');
+                if (response.success) {
+                    toast.success('Booking cancelled.');
+                } else {
+                    toast.error('Failed to cancel booking.');
+                }
             } catch (error) {
                 console.log('Failed to cancel booking');
                 toast.error('Failed to cancel booking.');
